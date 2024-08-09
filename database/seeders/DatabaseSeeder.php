@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CourseSeeder::class,
         ]);
-        Material::factory(50)->recycle([Course::all()])->create();
+        Material::factory(70)->recycle([Course::all()])->create();
 
     }
 }

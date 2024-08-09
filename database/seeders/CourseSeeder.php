@@ -14,7 +14,7 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
 
-        Course::factory(25)->create();
+        Course::factory(24)->create();
         Course::create([
             'title' => 'Tutorial Laravel 10 Untuk Pemula',
             'slug' => 'tutorial-laravel-10-untuk-pemula',

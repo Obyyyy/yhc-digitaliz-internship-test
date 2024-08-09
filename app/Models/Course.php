@@ -18,10 +18,6 @@ class Course extends Model
         'duration',
     ];
 
-    // protected $with = [
-    //     'materials'
-    // ];
-
     public function materials(): HasMany {
         return $this->hasMany(Material::class, 'course_id', 'id');
     }

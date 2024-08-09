@@ -21,7 +21,7 @@ class MaterialFactory extends Factory
             'course_id' => Course::factory(),
             'title' => fake()->sentence(2),
             'description' => fake()->paragraph(3, false),
-            'link' => fake()->sentence(1),
+            'link' => fake()->randomElement(['https://www.youtube.com/embed/Y_6TuCBS6EE', 'https://www.youtube.com/embed/T1TR-RGf2Pw', 'https://www.youtube.com/embed/Zw6kc6dd7Dc',  'https://www.youtube.com/embed/4D7wQiHidDw']),
         ];
     }
 }

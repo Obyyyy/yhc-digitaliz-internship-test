@@ -139,12 +139,18 @@
                                                 </li>
                                             </ul>
                                             <div class="py-1">
-                                                <form
+                                                <form id="delete-form-{{ $index }}"
                                                     action="{{ route('course.delete', ['course' => $course->slug]) }}"
-                                                    method="GET">
+                                                    method="POST">
                                                     @csrf
-                                                    <button type="submit"
-                                                        class="flex items-center w-full text-left py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><svg
+                                                    @method('DELETE')
+                                                    <button id="delete-button-{{ $index }}" type="button"
+                                                        data-modal-target="popup-modal-{{ $index }}"
+                                                        class="flex
+                                                        items-center w-full text-left py-2 px-4 text-sm text-gray-700
+                                                        hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200
+                                                        dark:hover:text-white"
+                                                        data-modal-toggle="popup-modal-{{ $index }}"><svg
                                                             class="w-5 h-5 text-gray-500 dark:text-gray-400"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" fill="none"
@@ -154,8 +160,37 @@
                                                                 d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                                         </svg> Delete</button>
                                                 </form>
-                                                {{-- <a href="{{ route('course.delete', ['course' => $course->slug]) }}"
-                                                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a> --}}
+                                                {{-- <script>
+                                                    document.addEventListener('DOMContentLoaded', function() {
+                                                        const deleteButton = document.getElementById('delete-button');
+                                                        const popupModal = document.getElementById('popup-modal');
+                                                        const deleteForm = document.getElementById('delete-form');
+
+                                                        // Tampilkan modal ketika tombol delete diklik
+                                                        deleteButton.addEventListener('click', function() {
+                                                            popupModal.classList.remove('hidden');
+                                                        });
+
+                                                        // Konfirmasi penghapusan
+                                                        const confirmDeleteButton = document.getElementById('confirm-delete');
+                                                        confirmDeleteButton.addEventListener('click', function() {
+                                                            deleteForm.submit();
+                                                        });
+
+                                                        // Menutup modal
+                                                        const cancelButton = document.getElementById('cancel-delete');
+                                                        cancelButton.addEventListener('click', function() {
+                                                            popupModal.classList.add('hidden');
+                                                        });
+
+                                                        // Tutup modal saat mengklik di luar modal
+                                                        window.addEventListener('click', function(event) {
+                                                            if (event.target === popupModal) {
+                                                                popupModal.classList.add('hidden');
+                                                            }
+                                                        });
+                                                    });
+                                                </script> --}}
                                             </div>
                                         </div>
                                     </td>
@@ -224,6 +259,7 @@
 
         </div>
     </section>
+    {{-- Success Pop Up --}}
     <div id="successModal" tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -266,4 +302,110 @@
             });
         </script>
     @endif
+
+    {{-- Confirm Delete Pop Up --}}
+    @foreach ($courses as $index => $course)
+        <div id="popup-modal-{{ $index }}" tabindex="-1" data-modal-id="popup-modal-{{ $index }}"
+            class="hidden overflow-y-auto overflow-x-hidden fixed flex z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button" id="close-button-{{ $index }}"
+                        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="popup-modal-{{ $index }}">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Yakin ingin menghapus
+                            data
+                            ini?</h3>
+                        <button id="confirm-delete-{{ $index }}" type="button"
+                            data-modal-hide="popup-modal-{{ $index }}"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            Ya, lanjutkan
+                        </button>
+                        <button id="cancel-delete-{{ $index }}" type="button"
+                            data-modal-hide="popup-modal-{{ $index }}"
+                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Tidak,
+                            kembali</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Overlay -->
+        {{-- <div id="overlay-{{ $index }}" class="fixed inset-0 bg-red-400 bg-opacity-50 z-40 hidden"></div> --}}
+    @endforeach
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle all delete buttons with dynamic IDs
+            document.querySelectorAll('[id^="delete-button-"]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.id.replace('delete-button-', '');
+                    const modal = document.getElementById(`popup-modal-${index}`);
+                    if (modal) {
+                        modal.classList.remove('hidden');
+                    }
+                });
+            });
+
+            // Handle confirmation button for each modal
+            document.querySelectorAll('[id^="confirm-delete-"]').forEach(confirmButton => {
+                confirmButton.addEventListener('click', function() {
+                    const index = this.id.replace('confirm-delete-', '');
+                    const form = document.getElementById(`delete-form-${index}`);
+                    if (form) {
+                        form.submit();
+                    }
+                });
+            });
+
+            // Handle cancel button for each modal
+            // document.querySelectorAll('[id^="cancel-delete-"]').forEach(button => {
+            //     button.addEventListener('click', function() {
+            //         const index = this.id.replace('cancel-delete-', '');
+            //         const modal = document.getElementById(`popup-modal-${index}`);
+            //         if (modal) {
+            //             modal.classList.add('hidden');
+            //         }
+            //     });
+            // });
+
+
+            // Handle close button for each modal
+            // document.querySelectorAll('[id ^= "close-button-"]').forEach(closeButton => {
+            //     closeButton.addEventListener('click', function() {
+            //         const index = this.id.replace('close-button-', '');
+            //         const modal = document.getElementById(`popup-modal-${index}`);
+            //         if (modal) {
+            //             modal.classList.add('hidden');
+            //         }
+            //     });
+            // });
+
+            // Close modal when clicking outside of it
+            // window.addEventListener('click', function(event) {
+            //     document.querySelectorAll('[id^="popup-modal-"]').forEach(modal => {
+            //         const index = modal.id.split('-').pop();
+            //         const overlay = document.getElementById(`overlay-${index}`);
+            //         overlay.classList.add('hidden');
+            //         // if (!modal.contains(event.target) && !overlay.contains(event.target) && !event
+            //         //     .target.matches('[data-modal-toggle]')) {
+            //         //     if (modal && overlay) {
+            //         //         // modal.classList.add('hidden');
+            //         //         // overlay.classList.add('hidden');
+            //         //     }
+            //         // }
+            //     });
+            // });
+        });
+    </script>
 </x-layout>
