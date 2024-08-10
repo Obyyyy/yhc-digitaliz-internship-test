@@ -31,7 +31,7 @@ class MaterialController extends Controller
 
     public function getMaterials() {
         $materials = Material::filter(request(['search', 'course']))->orderBy('id', 'desc')->with('course')->paginate(10)->withQueryString();
-        $courses = Course::latest()->get();
+        $courses = Course::select()->orderBy('id', 'desc')->get();
         return view('materials.materials', compact('materials', 'courses'));
     }
 
