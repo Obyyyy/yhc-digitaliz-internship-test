@@ -1,26 +1,26 @@
 <x-layout>
-    {{-- <ol
-        class="flex items-center w-full p-3 mb-4 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-md dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 rtl:space-x-reverse">
-        <li class="flex items-center text-blue-600 dark:text-blue-500">
-            List Kursus
+    <ol
+        class="flex items-center w-full p-3 mb-4 space-x-2 text-sm font-medium text-center text-gray-700 bg-white border border-gray-200 rounded-md dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 rtl:space-x-reverse">
+        <li class="flex items-center">
+            <a class="hover:underline hover:text-blue-500" href="{{ route('courses') }}">List Kursus</a>
             <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 12 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="m7 9 4-4-4-4M1 9l4-4-4-4" />
             </svg>
         </li>
-        <li class="flex items-center">
+        <li class="flex items-center text-gray-500">
             {{ $course->title }}
-            <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            {{-- <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 12 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="m7 9 4-4-4-4M1 9l4-4-4-4" />
-            </svg>
+            </svg> --}}
         </li>
-        <li class="flex items-center">
+        {{-- <li class="flex items-center">
             Review
-        </li>
-    </ol> --}}
+        </li> --}}
+    </ol>
 
 
     <section class="bg-white dark:bg-gray-900 border border-gray-200">
@@ -36,7 +36,19 @@
                 </dd>
             </dl>
             <div class="flex items-center space-x-4 justify-end">
-                <a href="{{ route('course.form.add.material', $course->slug) }}">
+                {{-- <a href="{{ route('course.form.add.material', $course->slug) }}">
+                    <button type="button"
+                        class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                        </svg>
+                        Tambah Materi
+                    </button>
+                </a> --}}
+
+                <a href="{{ url('materials') }}?course={{ $course->slug }}">
                     <button type="button"
                         class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                         <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -47,19 +59,9 @@
                                 d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
                                 clip-rule="evenodd"></path>
                         </svg>
-                        Tambah Materi
+                        Edit Materi
                     </button>
                 </a>
-                {{-- <button type="button"
-                    class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
-                    <svg aria-hidden="true" class="w-5 h-5 mr-1.5 -ml-1" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                    Delete
-                </button> --}}
             </div>
             <div class="overflow-x-auto ">
                 {{-- <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -148,61 +150,33 @@
 
                 <div id="accordion-nested-parent" data-accordion="collapse" class="my-4">
                     @foreach ($materials as $index => $material)
-                        @if ($index === 0)
-                            <h2 id="accordion-collapse-heading-{{ $index }}">
-                                <button type="button"
-                                    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                                    data-accordion-target="#accordion-collapse-body-{{ $index }}"
-                                    aria-expanded="true" aria-controls="accordion-collapse-body-1">
-                                    <span>{{ $material->title }}</span>
-                                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 5 5 1 1 5" />
-                                    </svg>
-                                </button>
-                            </h2>
-                            <div id="accordion-collapse-body-{{ $index }}" class="hidden"
-                                aria-labelledby="accordion-collapse-heading-{{ $index }}">
-                                <div
-                                    class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                    <p class="mb-4 text-gray-500 dark:text-gray-400">{{ $material->description }}</p>
-                                    <div class="flex justify-center border-t">
-                                        <iframe class="my-4 border" width="560" height="315"
-                                            src="{{ $material->link }}" title="YouTube video player" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
-                                    </div>
+                        <h2 id="accordion-collapse-heading-{{ $index }}">
+                            <button type="button"
+                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500  {{ $materials->count() == 1 ? 'border border-b-1' : 'border' }} {{ $loop->last ? 'border-b-1' : 'border-b-0' }} border-gray-200 {{ $index === 0 ? 'rounded-t-2xl' : '' }} focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+                                data-accordion-target="#accordion-collapse-body-{{ $index }}"
+                                aria-expanded="true" aria-controls="accordion-collapse-body-1">
+                                <span>{{ $material->title }}</span>
+                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M9 5 5 1 1 5" />
+                                </svg>
+                            </button>
+                        </h2>
+                        <div id="accordion-collapse-body-{{ $index }}" class="hidden"
+                            aria-labelledby="accordion-collapse-heading-{{ $index }}">
+                            <div
+                                class="p-5 border  {{ $materials->count() == 1 ? 'border-b-1' : 'border-b-0' }} border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                                <p class="mb-4 text-gray-500 dark:text-gray-400">{{ $material->description }}</p>
+                                <div class="flex justify-center border-t">
+                                    <iframe class="my-4 border w-full md:h-80 sm:h-64 xs:h-32"
+                                        src="{{ $material->link }}" title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                                </div>
 
-                                </div>
                             </div>
-                        @else
-                            <h2 id="accordion-collapse-heading-{{ $index }}">
-                                <button type="button"
-                                    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                                    data-accordion-target="#accordion-collapse-body-{{ $index }}"
-                                    aria-expanded="false" aria-controls="accordion-collapse-body-2">
-                                    <span>{{ $material->title }}</span>
-                                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="M9 5 5 1 1 5" />
-                                    </svg>
-                                </button>
-                            </h2>
-                            <div id="accordion-collapse-body-{{ $index }}" class="hidden"
-                                aria-labelledby="accordion-collapse-heading-{{ $index }}">
-                                <div class="p-5 border border-gray-200 dark:border-gray-700">
-                                    <p class="mb-2 text-gray-500 dark:text-gray-400">{{ $material->description }}</p>
-                                    <div class="flex justify-center">
-                                        <iframe width="560" height="315" src="{{ $material->link }}"
-                                            title="YouTube video player" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
+                        </div>
                     @endforeach
                 </div>
 
@@ -212,7 +186,7 @@
 
     {{-- Success Pop Up --}}
     <div id="successModal" tabindex="-1" aria-hidden="true"
-        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full sm:h-full">
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
             <!-- Modal content -->
             <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">

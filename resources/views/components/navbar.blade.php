@@ -19,13 +19,13 @@
                 </svg>
                 <span class="sr-only">Toggle sidebar</span>
             </button>
-            <a href="https://flowbite.com" class="flex items-center justify-between mr-4">
+            <a href="{{ route('home') }}" class="flex items-center justify-between mr-4">
                 <img src="https://flowbite.s3.amazonaws.com/logo.svg" class="mr-3 h-8" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">YHC
                     Dahsboard</span>
             </a>
         </div>
-        <div class="flex items-center lg:order-2">
+        {{-- <div class="flex items-center lg:order-2">
             <button type="button" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation"
                 class="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
                 <span class="sr-only">Toggle search</span>
@@ -35,32 +35,32 @@
                         d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z">
                     </path>
                 </svg>
-            </button>
+            </button> --}}
 
-            <!-- Profile -->
-            <button type="button"
-                class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
-                <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full"
-                    src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
-                    alt="user photo" />
-            </button>
-            <!-- Dropdown menu Profile -->
-            <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
-                id="dropdown">
-                <div class="py-3 px-4">
-                    <span class="block text-sm font-semibold text-gray-900 dark:text-white">Ardi</span>
-                    <span class="block text-sm text-gray-900 truncate dark:text-white">ardi@digitaliz.com</span>
-                </div>
-                {{-- <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
+        <!-- Profile -->
+        <button type="button"
+            class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
+            <span class="sr-only">Open user menu</span>
+            <img class="w-8 h-8 rounded-full"
+                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+                alt="user photo" />
+        </button>
+        <!-- Dropdown menu Profile -->
+        <div class="hidden z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+            id="dropdown">
+            <div class="py-3 px-4">
+                <span class="block text-sm font-semibold text-gray-900 dark:text-white">Ardi</span>
+                <span class="block text-sm text-gray-900 truncate dark:text-white">ardi@digitaliz.com</span>
+            </div>
+            {{-- <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
                     <li>
                         <a href="#"
                             class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign
                             out</a>
                     </li> --}}
-                </ul>
-            </div>
+            </ul>
         </div>
+    </div>
     </div>
 </nav>

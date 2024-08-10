@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\storeCourseRequest;
 use App\Models\Course;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -10,13 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 class CourseController extends Controller
 {
     public function getCourses() {
-        // $courses = Course::latest();
-        // if(request('search')) {
-        //     $courses->where('title', 'like', '%'.request('search').'%');
-        // }
-
         $courses = Course::filter(request(['search']))->latest()->paginate(10)->withQueryString()->onEachSide(1);
-
         return view('courses/courses',compact('courses') );
     }
 
@@ -24,21 +19,11 @@ class CourseController extends Controller
         return view('courses/add-course');
     }
 
-    public function AddCourse(Request $request) {
-        $request->validate([
-            'title' => 'required|min:5',
-            'duration' => 'required|numeric|not_in:0',
-            'description' => 'required|min:20|max:500',
-        ], [
-            'title.required' => 'Judul wajib diisi.',
-            'title.min' => 'Judul tidak boleh kurang dari 5 karakter.',
-            'duration.required' => 'Durasi Kursus wajib diisi.',
-            'duration.numeric' => 'Masukkan durasi kursus dalam angka.',
-            'duration.not_in' => 'Angka durasi tidak boleh 0.',
-            'description.required' => 'Deskripsi wajib diisi.',
-            'description.min' => 'Deskripsi tidak boleh kurang dari 20 karakter.',
-            'description.max' => 'Deskripsi tidak boleh lebih dari 500 karakter.',
-        ]);
+    public function AddCourse(storeCourseRequest $request) {
+        $checkTitle = Course::select()->where('title', $request->title)->first();
+        if ($checkTitle) {
+            return redirect()->route('courses')->with('error', 'Gagal menambahkah kursus, berikan Judul berbeda');
+        }
 
         $course = Course::create([
             'title' => $request->title,
@@ -46,10 +31,11 @@ class CourseController extends Controller
             'duration' => $request->duration,
             'description' => $request->description
         ]);
+
         if($course) {
-            return redirect()->route('courses')->with('success', 'Kursus Berhasil Ditambahkan');
+            return redirect()->route('courses')->with('success', 'Berhasil menambahkan kursus');
         } else {
-            return redirect()->route('courses')->with('success', 'Kursus Gagal Ditambahkan');
+            return redirect()->route('courses')->with('error', 'Gagal menambahkan kursus');
         }
     }
 
@@ -67,21 +53,13 @@ class CourseController extends Controller
         return view('courses/edit-course', compact('course'));
     }
 
-    public function editCourse(Request $request, Course $course) {
-        $request->validate([
-            'title' => 'required|min:5',
-            'duration' => 'required|numeric|not_in:0',
-            'description' => 'required|min:20|max:500',
-        ], [
-            'title.required' => 'Judul wajib diisi.',
-            'title.min' => 'Judul tidak boleh kurang dari 5 karakter.',
-            'duration.required' => 'Durasi Kursus wajib diisi.',
-            'duration.numeric' => 'Masukkan durasi kursus dalam angka.',
-            'duration.not_in' => 'Angka durasi tidak boleh 0.',
-            'description.required' => 'Deskripsi wajib diisi.',
-            'description.min' => 'Deskripsi tidak boleh kurang dari 20 karakter.',
-            'description.max' => 'Deskripsi tidak boleh lebih dari 500 karakter.',
-        ]);
+    public function editCourse(storeCourseRequest $request, Course $course) {
+        if ($request->title !== $course->title) {
+            $checkTitle = Course::select()->where('title', $request->title)->first();
+            if ($checkTitle) {
+                return redirect()->route('courses')->with('error', 'Gagal menambahkah kursus, berikan Judul berbeda');
+            }
+        }
 
         $course->update([
             'title' => $request->title,
@@ -90,6 +68,6 @@ class CourseController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('courses')->with(['success' => 'Kursus Berhail Diedit']);
+        return redirect()->route('courses')->with(['success' => 'Berhasil mengedit kursus']);
     }
 }

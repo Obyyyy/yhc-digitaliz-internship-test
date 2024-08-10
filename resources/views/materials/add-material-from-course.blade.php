@@ -1,4 +1,28 @@
 <x-layout>
+    <ol
+        class="flex items-center w-full p-3 mb-4 space-x-2 text-sm font-medium text-center text-gray-700 bg-white border border-gray-200 rounded-md dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 rtl:space-x-reverse">
+        <li class="flex items-center">
+            <a class="hover:underline hover:text-blue-500" href="{{ route('courses') }}">List Kursus</a>
+            <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 12 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m7 9 4-4-4-4M1 9l4-4-4-4" />
+            </svg>
+        </li>
+        <li class="flex items-center">
+            <a class="hover:underline hover:text-blue-500"
+                href="{{ route('course.detail', $course->slug) }}">{{ $course->title }}</a>
+            <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 12 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m7 9 4-4-4-4M1 9l4-4-4-4" />
+            </svg>
+        </li>
+        <li class="flex items-center text-gray-500">
+            Tambah Materi
+        </li>
+    </ol>
+
     <section class="bg-white dark:bg-gray-900 border border-gray-200">
         <div class="py-8 mb-4` px-4 mx-auto max-w-2xl lg:py-16">
             <h2 class="mb-4 text-xl text-center font-bold text-gray-900 dark:text-white">Tambah Materi pada Kursus:
@@ -57,7 +81,7 @@
                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                             clip-rule="evenodd"></path>
                     </svg>
-                    Tambah Kursus
+                    Tambah Materi
                 </button>
             </form>
         </div>

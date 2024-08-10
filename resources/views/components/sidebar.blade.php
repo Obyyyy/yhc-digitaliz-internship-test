@@ -2,7 +2,7 @@
     class="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
     aria-label="Sidenav" id="drawer-navigation">
     <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
-        <form action="#" method="GET" class="md:hidden mb-2">
+        {{-- <form action="#" method="GET" class="md:hidden mb-2">
             <label for="sidebar-search" class="sr-only">Search</label>
             <div class="relative">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -17,7 +17,7 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Search" />
             </div>
-        </form>
+        </form> --}}
         <ul class="space-y-2">
             {{-- Overview --}}
             <x-menu-link href="/" :active="request()->is('/')">
@@ -30,25 +30,24 @@
                 <span class="ml-3">Overview</span>
             </x-menu-link>
             {{-- Pages --}}
-            <x-menu-link href="{{ route('courses') }}" :active="request()->is('courses')">
+            <x-menu-link href="{{ route('courses') }}" :active="Str::contains(request()->path(), 'courses')">
                 <svg aria-hidden="true"
                     class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
-                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                        clip-rule="evenodd"></path>
+                        d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z"
+                        clip-rule="evenodd" />
                 </svg>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap">Kursus</span>
             </x-menu-link>
             {{-- Materi --}}
-            <x-menu-link href="{{ route('materials') }}" :active="request()->is('materials')">
+            <x-menu-link href="{{ route('materials') }}" :active="Str::contains(request()->path(), 'materials')">
                 <svg aria-hidden="true"
                     class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                    fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
-                        d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                        clip-rule="evenodd"></path>
+                        d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z"
+                        clip-rule="evenodd" />
                 </svg>
                 <span class="flex-1 ml-3 text-left whitespace-nowrap">Materi</span>
             </x-menu-link>
