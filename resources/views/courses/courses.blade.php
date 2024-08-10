@@ -6,9 +6,10 @@
                 <div
                     class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                     <div class="w-full md:w-1/2">
-                        <form class="flex items-center" action="{{ route('courses') }}" method="GET">
+                        <form class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0"
+                            action="{{ route('courses') }}" method="GET">
                             <label for="simple-search" class="sr-only">Search</label>
-                            <div class="relative w-full">
+                            <div class="relative w-full flex-grow">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
                                         fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +34,7 @@
 
                     {{-- Menambahkan Course --}}
                     <div
-                        class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
+                        class="w-full md:w-1/2 flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                         <a href="{{ route('course.form.add') }}">
                             <button type="button"
                                 class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
@@ -132,37 +133,6 @@
                                                                 d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
                                                         </svg> Hapus</button>
                                                 </form>
-                                                {{-- <script>
-                                                    document.addEventListener('DOMContentLoaded', function() {
-                                                        const deleteButton = document.getElementById('delete-button');
-                                                        const popupModal = document.getElementById('popup-modal');
-                                                        const deleteForm = document.getElementById('delete-form');
-
-                                                        // Tampilkan modal ketika tombol delete diklik
-                                                        deleteButton.addEventListener('click', function() {
-                                                            popupModal.classList.remove('hidden');
-                                                        });
-
-                                                        // Konfirmasi penghapusan
-                                                        const confirmDeleteButton = document.getElementById('confirm-delete');
-                                                        confirmDeleteButton.addEventListener('click', function() {
-                                                            deleteForm.submit();
-                                                        });
-
-                                                        // Menutup modal
-                                                        const cancelButton = document.getElementById('cancel-delete');
-                                                        cancelButton.addEventListener('click', function() {
-                                                            popupModal.classList.add('hidden');
-                                                        });
-
-                                                        // Tutup modal saat mengklik di luar modal
-                                                        window.addEventListener('click', function(event) {
-                                                            if (event.target === popupModal) {
-                                                                popupModal.classList.add('hidden');
-                                                            }
-                                                        });
-                                                    });
-                                                </script> --}}
                                             </div>
                                         </div>
                                     </td>

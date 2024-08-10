@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 class CourseController extends Controller
 {
     public function getCourses() {
-        $courses = Course::filter(request(['search']))->latest()->paginate(10)->withQueryString()->onEachSide(1);
+        $courses = Course::filter(request(['search']))->orderBy('id', 'desc')->paginate(10)->withQueryString()->onEachSide(1);
         return view('courses/courses',compact('courses') );
     }
 

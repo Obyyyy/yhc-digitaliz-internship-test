@@ -12,11 +12,6 @@ Route::get('/', function () {
     return view('index', compact('courseCount', 'materialCount'));
 })->name('home');
 
-
-Route::get('/messages', function () {
-    return view('404');
-});
-
 Route::group(['prefix'=>'courses'], function(){
     Route::get('/', [CourseController::class, 'getCourses'])->name('courses');
     Route::get('/add', [CourseController::class, 'formAddCourse'])->name('course.form.add');

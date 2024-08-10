@@ -39,10 +39,10 @@
                         <label for="course"
                             class="block my-2 text-sm font-medium text-gray-900 dark:text-white">Kursus</label>
                         <select id="course" name="course"
-                            class="@error('course') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Pilih Kursus</option>
+                            class="@error('course') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 xs:text-xs md:text-sm lg:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option selected="" disabled class="text-xs">Pilih Kursus</option>
                             @foreach ($courses as $course)
-                                <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                <option value="{{ $course->id }}" class="text-xs">{{ $course->title }}</option>
                             @endforeach
                         </select>
                         {{-- <input type="text" name="course" id="course"

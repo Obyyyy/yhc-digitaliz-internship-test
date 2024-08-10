@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+const defaultTheme = require("tailwindcss/defaultTheme");
+module.exports = {
     darkMode: "class",
     content: [
         "./resources/**/*.blade.php",
@@ -8,6 +9,11 @@ export default {
         "./node_modules/flowbite/**/*.js",
     ],
     theme: {
+        screens: {
+            xs: { max: "390px" },
+            // xs: "360px",
+            ...defaultTheme.screens,
+        },
         extend: {
             colors: {
                 primary: {

@@ -40,10 +40,10 @@
                         <form class="flex items-center relative" action="{{ route('materials') }}" method="GET">
                             <!-- Dropdown Select -->
                             <select id="course" name="course"
-                                class="@error('course') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-primary-500 focus:border-primary-500 block w-1/4 p-2 border-e-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option value="" selected>Pilih Kursus</option>
+                                class="@error('course') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm  rounded-l-lg focus:ring-primary-500 focus:border-primary-500 block w-1/4 p-2 border-e-0 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="" class="text-xs">Pilih Kursus</option>
                                 @foreach ($courses as $course)
-                                    <option value="{{ $course->slug }}"
+                                    <option value="{{ $course->slug }}" class="text-xs"
                                         {{ request('course') == $course->slug ? 'selected' : '' }}>
                                         {{ $course->title }}
                                     </option>
@@ -89,7 +89,7 @@
                         <a
                             href="{{ request('course') ? route('course.form.add.material', request()->query('course')) : route('material.form.add') }}">
                             <button type="button"
-                                class="flex items-center justify-center text-white bg-primary-700  hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                                class="flex items-center justify-center text-white bg-primary-700  hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 xs:text-xs sm:text-xs md:text-sm">
                                 <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path clip-rule="evenodd" fill-rule="evenodd"
@@ -119,7 +119,7 @@
                                     <th scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $material->title }}</th>
-                                    <td class="px-4 py-3"><a class="hover:underline"
+                                    <td class="px-4 py-3"><a class="underline hover:text-primary-400"
                                             href="{{ route('course.detail', $material->course->slug) }}">{{ $material->course->title }}</a>
                                     </td>
                                     <td class="px-4 py-3">{{ Str::limit($material->description, 50) }}</td>
@@ -139,20 +139,6 @@
                                             class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                                 aria-labelledby="dropdown-{{ $index }}">
-                                                {{-- <li>
-                                                    <a href="#"
-                                                        class="flex items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><svg
-                                                            class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                            width="24" height="24" fill="none"
-                                                            viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-width="2"
-                                                                d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z" />
-                                                            <path stroke="currentColor" stroke-width="2"
-                                                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                        </svg>
-                                                        Show</a>
-                                                </li> --}}
                                                 <li>
                                                     <div
                                                         class="flex items-center hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">

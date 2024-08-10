@@ -30,7 +30,7 @@ class MaterialController extends Controller
     }
 
     public function getMaterials() {
-        $materials = Material::filter(request(['search', 'course']))->latest()->with('course')->paginate(10)->withQueryString();
+        $materials = Material::filter(request(['search', 'course']))->orderBy('id', 'desc')->with('course')->paginate(10)->withQueryString();
         $courses = Course::latest()->get();
         return view('materials.materials', compact('materials', 'courses'));
     }
@@ -82,7 +82,7 @@ class MaterialController extends Controller
             $checkSlug = Material::select()->where('slug', Str::slug($combinedTitle))->first();
             if ($checkSlug) {
                 if ($courseQueryParam) {
-                    return redirect()->to('/materials?course='.$courseQueryParam)->with('error', 'Gagal memperbarui materi, berikan judl materi yang berbeda!');;
+                    return redirect()->to('/materials?course='.$courseQueryParam)->with('error', 'Gagal memperbarui materi, berikan judul materi yang berbeda!');;
                 }
                 return redirect()->route('materials')->with('error', 'Gagal memperbarui materi, berikan judul materi yang berbeda!');
             }
